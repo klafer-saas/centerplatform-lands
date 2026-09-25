@@ -38,9 +38,9 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer id="contato" className="bg-[#111] px-5 text-[#CCC] sm:px-8 lg:px-12">
-      <div className="mx-auto w-full max-w-7xl pb-7 pt-14 sm:pt-16">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.45fr_0.6fr_0.65fr_1fr] lg:gap-16">
+    <footer id="contato" className="bg-[#111] px-5 text-[#CCCCCC] sm:px-8 lg:px-12">
+      <div className="mx-auto w-full max-w-7xl pb-7 pt-14 sm:pt-[60px] xl:pt-16">
+        <div className="grid gap-10 sm:grid-cols-2 sm:gap-12 lg:grid-cols-[1.45fr_0.6fr_0.65fr_1fr] lg:gap-16">
           <div>
             <a
               href="#inicio"
@@ -62,14 +62,14 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold text-zinc-200">Redes Sociais</h2>
+            <h2 className="text-sm font-semibold text-white">Redes Sociais</h2>
             <div className="mt-5 flex items-center gap-4">
               {socialLinks.map(({ label, icon: Icon }) => (
                 <span
                   key={label}
                   aria-label={`${label} — em breve`}
                   title={`${label} — em breve`}
-                  className="cursor-default"
+                  className="cursor-default transition-colors duration-200 hover:text-brand"
                 >
                   <Icon aria-hidden="true" className="h-6 w-6" />
                 </span>
@@ -78,7 +78,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Links do rodapé">
-            <h2 className="text-sm font-semibold text-zinc-200">Links Rápidos</h2>
+            <h2 className="text-sm font-semibold text-white">Links Rápidos</h2>
             <ul className="mt-5 space-y-4">
               {quickLinks.map((link) => (
                 <li key={link.label}>
@@ -94,7 +94,7 @@ export function Footer() {
           </nav>
 
           <div>
-            <h2 className="text-sm font-semibold text-zinc-200">
+            <h2 className="text-sm font-semibold text-white">
               Endereço e Contato
             </h2>
             <div className="mt-5 space-y-4 text-sm leading-6">
@@ -111,7 +111,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 border-t border-white/[0.08] pt-6">
+        <div className="mt-10 border-t border-white/[0.08] pt-6 sm:mt-14">
           <p className="text-xs">
             © CenterPlatform.ai. Todos os direitos reservados.
           </p>

@@ -87,7 +87,7 @@ export function SolutionsSection({
     <section
       id="solucoes"
       aria-labelledby="solutions-title"
-      className="scroll-mt-24 bg-ink px-5 pb-20 pt-12 text-white sm:px-8 sm:pb-28 sm:pt-20 lg:px-12 lg:pb-32 lg:pt-24"
+      className="bg-ink px-5 pb-20 pt-12 text-white sm:px-8 sm:py-[60px] lg:px-12 xl:pb-32 xl:pt-24"
     >
       <div className="mx-auto w-full max-w-[1320px]">
         <header className="mx-auto flex max-w-3xl flex-col items-center text-center">
@@ -130,7 +130,7 @@ export function SolutionsSection({
 
           <FadeInText
             text={description}
-            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#ddd] sm:text-[20px] sm:leading-8"
+            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#CCCCCC] sm:text-[20px] sm:leading-8"
           />
         </header>
 
@@ -176,7 +176,7 @@ export function SolutionsSection({
                   {solution.title}
                 </h3>
 
-                <p className="mt-3 max-w-sm text-[14px] leading-5 text-zinc-500 sm:mt-4 sm:leading-6">
+                <p className="mt-3 max-w-sm text-[14px] leading-5 text-[#CCCCCC] sm:mt-4 sm:leading-6">
                   {solution.description}
                 </p>
               </motion.article>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -123,6 +123,7 @@ export function HeroHeader({
   const [activeSection, setActiveSection] = useState("inicio");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const pendingMobileHrefRef = useRef<string | null>(null);
   const headerPortalRoot = document.getElementById("header-root");
 
   useEffect(() => {
@@ -165,6 +166,27 @@ export function HeroHeader({
     };
   }, [mobileMenuOpen]);
 
+  const handleMobileNavigation = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    event.preventDefault();
+    pendingMobileHrefRef.current = href;
+    setMobileMenuOpen(false);
+  };
+
+  const completeMobileNavigation = () => {
+    const href = pendingMobileHrefRef.current;
+    if (!href) return;
+
+    pendingMobileHrefRef.current = null;
+    document.querySelector(href)?.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "start",
+    });
+    window.history.pushState(null, "", href);
+  };
+
   return (
     <DotGridBackground
       dotColor="#ffffff"
@@ -176,9 +198,9 @@ export function HeroHeader({
       scaleOnHover={1.8}
       glowPosition="top-right"
       glowOpacity={0.25}
-      className="min-h-screen text-white"
+      className="min-h-[100svh] text-white sm:min-h-screen"
     >
-      <div id="inicio" className="flex min-h-screen flex-col scroll-mt-24">
+      <div id="inicio" className="flex min-h-[100svh] flex-col scroll-mt-24 sm:min-h-screen">
         {headerPortalRoot && createPortal(
           <header
           className={`fixed inset-x-0 top-0 z-50 font-sans font-normal transition-[background-color,box-shadow] duration-300 ${
@@ -203,15 +225,13 @@ export function HeroHeader({
               />
             </a>
 
-            <div className="hidden items-center gap-7 text-sm md:flex lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+            <div className="hidden items-center gap-7 text-sm md:ml-auto md:flex">
               {navigationLinks.map(({ href, label, id }) => (
                 <a
                   key={id}
                   href={href}
                   aria-current={activeSection === id ? "page" : undefined}
-                  className={`transition-colors hover:text-brand ${
-                    activeSection === id ? "text-brand" : "text-zinc-300"
-                  }`}
+                  className="text-white transition-colors hover:text-brand"
                 >
                   {label}
                 </a>
@@ -233,7 +253,10 @@ export function HeroHeader({
             </div>
           </nav>
 
-          <AnimatePresence initial={false}>
+          <AnimatePresence
+            initial={false}
+            onExitComplete={completeMobileNavigation}
+          >
             {mobileMenuOpen && (
               <motion.div
                 id="mobile-navigation"
@@ -249,12 +272,8 @@ export function HeroHeader({
                       key={id}
                       href={href}
                       aria-current={activeSection === id ? "page" : undefined}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`border-b border-white/10 px-4 py-3 text-sm transition-colors last:border-b-0 ${
-                        activeSection === id
-                          ? "text-brand"
-                          : "text-zinc-300 hover:bg-white/[0.04] hover:text-white"
-                      }`}
+                      onClick={(event) => handleMobileNavigation(event, href)}
+                      className="border-b border-white/10 px-4 py-3 text-sm text-white transition-colors last:border-b-0 hover:bg-white/[0.04] hover:text-brand"
                     >
                       {label}
                     </a>
@@ -282,7 +301,7 @@ export function HeroHeader({
           staggerDelay={0.025}
           delayChildren={0.72}
           once
-          className="mt-6 max-w-2xl text-pretty text-sm leading-6 text-[#B0B0B0] sm:text-base sm:leading-7"
+          className="mt-6 max-w-2xl text-pretty text-sm leading-6 text-[#CCCCCC] sm:text-base sm:leading-7"
         />
 
         <motion.a

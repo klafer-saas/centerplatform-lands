@@ -11,32 +11,6 @@ export type IntroLoaderProps = {
 export function IntroLoader({ onReveal }: IntroLoaderProps) {
   const prefersReducedMotion = useReducedMotion();
   const [visible, setVisible] = useState(true);
-  const [typedName, setTypedName] = useState("");
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      setTypedName(BRAND_NAME);
-      return;
-    }
-
-    let characterIndex = 0;
-    let typingTimer = 0;
-    const startTimer = window.setTimeout(() => {
-      typingTimer = window.setInterval(() => {
-        characterIndex += 1;
-        setTypedName(BRAND_NAME.slice(0, characterIndex));
-
-        if (characterIndex >= BRAND_NAME.length) {
-          window.clearInterval(typingTimer);
-        }
-      }, 65);
-    }, 320);
-
-    return () => {
-      window.clearTimeout(startTimer);
-      window.clearInterval(typingTimer);
-    };
-  }, [prefersReducedMotion]);
 
   useEffect(() => {
     const revealDelay = prefersReducedMotion ? 450 : 2800;
@@ -120,7 +94,7 @@ export function IntroLoader({ onReveal }: IntroLoaderProps) {
           >
             <div
               aria-hidden="true"
-              className="flex items-center justify-center gap-3 sm:gap-4"
+              className="flex w-full flex-col items-center justify-center gap-1 sm:w-auto sm:flex-row sm:gap-4"
             >
               <motion.div
                 initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.72 }}
@@ -129,16 +103,16 @@ export function IntroLoader({ onReveal }: IntroLoaderProps) {
                   duration: prefersReducedMotion ? 0 : 0.55,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="relative h-16 w-28 shrink-0 overflow-visible sm:h-20 sm:w-32"
+                className="relative h-20 w-20 shrink-0 overflow-visible sm:h-20 sm:w-32"
               >
                 <img
                   src={whiteYellowLogo}
                   alt=""
-                  className="pointer-events-none absolute left-1/2 top-1/2 h-[205px] w-[205px] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain sm:h-[235px] sm:w-[235px]"
+                  className="pointer-events-none absolute left-1/2 top-1/2 h-[150px] w-[150px] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain sm:h-[235px] sm:w-[235px]"
                 />
               </motion.div>
 
-              <span className="min-w-[294px] whitespace-nowrap font-source-code-pro text-[32px] font-semibold tracking-[-0.04em] text-white sm:min-w-[385px] sm:text-[42px]">
+              <span className="min-w-0 whitespace-nowrap text-center font-source-code-pro text-[24px] font-semibold tracking-[-0.04em] text-white sm:min-w-[385px] sm:text-left sm:text-[42px]">
                 <motion.span
                   animate={
                     prefersReducedMotion
@@ -165,7 +139,7 @@ export function IntroLoader({ onReveal }: IntroLoaderProps) {
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  {typedName}
+                  {BRAND_NAME}
                 </motion.span>
                 <motion.span
                   animate={prefersReducedMotion ? undefined : { opacity: [1, 0, 1] }}

@@ -100,10 +100,10 @@ export function IntelligenceStepsSection({
     <section
       ref={sectionRef}
       aria-labelledby="intelligence-steps-title"
-      className="relative bg-ink text-white sm:h-[220vh] sm:min-h-[1100px]"
+      className="relative bg-ink text-white xl:h-[220vh] xl:min-h-[1100px]"
     >
-      <div className="flex items-center px-5 pb-16 pt-24 sm:sticky sm:top-0 sm:min-h-screen sm:overflow-hidden sm:px-8 sm:py-16 lg:px-12">
-      <div className="mx-auto w-full max-w-[1320px] sm:-translate-y-8">
+      <div className="flex items-center px-5 pb-16 pt-12 sm:px-8 sm:py-[60px] lg:px-12 xl:sticky xl:top-0 xl:min-h-screen xl:overflow-hidden xl:py-16">
+      <div className="mx-auto w-full max-w-[1320px] xl:-translate-y-8">
         <header className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <motion.div
             initial={
@@ -144,7 +144,7 @@ export function IntelligenceStepsSection({
 
           <FadeInText
             text={subtitle}
-            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#DDD] lg:text-[20px] lg:leading-8"
+            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#CCCCCC] lg:text-[20px] lg:leading-8"
           />
         </header>
 
@@ -159,7 +159,7 @@ export function IntelligenceStepsSection({
             />
           </div>
 
-          <div className="grid gap-12 sm:grid-cols-3 sm:gap-6">
+          <div className="grid gap-10 sm:grid-cols-3 sm:gap-6">
             {safeSteps.map((step, index) => {
               const isActive = index === activeStep;
               const isComplete = index < activeStep;
@@ -176,7 +176,7 @@ export function IntelligenceStepsSection({
                     className={`relative z-10 flex h-16 w-16 items-center justify-center rounded-full text-center text-[28px] font-semibold leading-none tracking-normal tabular-nums transition-[background-color,color,transform] duration-300 group-hover:scale-105 sm:h-20 sm:w-20 sm:text-[35px] ${
                       isActive || isComplete
                         ? "bg-brand text-black"
-                        : "bg-zinc-800 text-zinc-500 group-hover:bg-zinc-700 group-hover:text-white"
+                        : "bg-zinc-800 text-zinc-400 group-hover:bg-zinc-700 group-hover:text-white"
                     }`}
                   >
                     {step.number ?? String(index + 1).padStart(2, "0")}
@@ -186,19 +186,13 @@ export function IntelligenceStepsSection({
                     className={`mt-6 text-[18px] font-semibold transition-colors duration-300 ${
                       isActive || isComplete
                         ? "text-brand"
-                        : "text-zinc-700"
+                        : "text-zinc-500 sm:text-zinc-700"
                     }`}
                   >
                     {step.title}
                   </span>
 
-                  <span
-                    className={`mt-4 max-w-sm text-[16px] leading-7 transition-colors duration-300 sm:px-4 ${
-                      isActive || isComplete
-                        ? "text-[#DDD]"
-                        : "text-zinc-700"
-                    }`}
-                  >
+                  <span className="mt-4 max-w-sm text-[16px] leading-7 text-[#CCCCCC] transition-colors duration-300 sm:px-4">
                     {step.description}
                   </span>
                 </button>

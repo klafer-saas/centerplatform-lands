@@ -129,7 +129,7 @@ export function MasterclassSection({
     <section
       id="masterclass"
       aria-labelledby="masterclass-heading"
-      className={`relative isolate overflow-hidden bg-ink px-5 pb-20 pt-16 text-white sm:px-8 sm:pb-28 sm:pt-24 lg:px-12 lg:pb-32 lg:pt-28 ${className}`}
+      className={`relative isolate overflow-hidden bg-ink px-5 pb-12 pt-16 text-white sm:px-8 sm:py-[60px] lg:px-12 xl:pb-32 xl:pt-28 ${className}`}
     >
       <div className="mx-auto w-full max-w-7xl">
         <header className="mx-auto flex max-w-4xl flex-col items-center text-center">
@@ -176,19 +176,19 @@ export function MasterclassSection({
             staggerDelay={0.025}
             delayChildren={0.2}
             once
-            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#DDD] sm:text-[20px] sm:leading-8"
+            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#CCCCCC] sm:text-[20px] sm:leading-8"
           />
         </header>
 
         <div className="mt-14 grid items-center gap-10 sm:mt-20 sm:gap-16 lg:mt-28 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:gap-24">
           <div
-            className="relative mx-auto h-[365px] w-full max-w-[490px] sm:h-[445px]"
+            className="relative mx-auto h-[320px] w-full max-w-[490px] sm:h-[360px] xl:h-[445px]"
             onMouseEnter={() => setCarouselPaused(true)}
             onMouseLeave={() => setCarouselPaused(false)}
             onFocus={() => setCarouselPaused(true)}
             onBlur={() => setCarouselPaused(false)}
           >
-            <div className="absolute inset-x-0 top-0 h-[315px] sm:h-[395px]">
+            <div className="absolute inset-x-0 top-0 h-[270px] sm:h-[310px] xl:h-[395px]">
               {displayPhotos.map((photo, index) => {
                 const relativePosition =
                   (index - activePhoto + displayPhotos.length) %
@@ -217,7 +217,7 @@ export function MasterclassSection({
                     aria-label={`Exibir ${photo.alt}`}
                     aria-hidden={!isActive}
                     tabIndex={isActive ? 0 : -1}
-                    className="absolute left-1/2 top-0 h-[285px] w-[60vw] max-w-[240px] cursor-pointer appearance-none overflow-hidden rounded-[26px] border-0 bg-transparent p-0 shadow-none outline-none sm:h-[365px] sm:w-[68vw] sm:max-w-[280px]"
+                    className="absolute left-1/2 top-0 h-[240px] w-[54vw] max-w-[205px] cursor-pointer appearance-none overflow-hidden rounded-[23px] border-0 bg-transparent p-0 shadow-none outline-none sm:h-[290px] sm:w-[55vw] sm:max-w-[220px] sm:rounded-[24px] xl:h-[365px] xl:w-[68vw] xl:max-w-[280px] xl:rounded-[26px]"
                     animate={position}
                     initial={false}
                     transition={{
@@ -242,7 +242,7 @@ export function MasterclassSection({
               })}
 
               {!hasPhotos && (
-                <div className="absolute left-1/2 top-0 flex h-[285px] w-[60vw] max-w-[240px] -translate-x-1/2 flex-col items-center justify-center rounded-[26px] bg-[#151515] px-8 text-center sm:h-[365px] sm:w-[68vw] sm:max-w-[280px]">
+                <div className="absolute left-1/2 top-0 flex h-[240px] w-[54vw] max-w-[205px] -translate-x-1/2 flex-col items-center justify-center rounded-[23px] bg-[#151515] px-5 text-center sm:h-[290px] sm:w-[55vw] sm:max-w-[220px] sm:rounded-[24px] sm:px-8 xl:h-[365px] xl:w-[68vw] xl:max-w-[280px] xl:rounded-[26px]">
                   <span className="flex h-24 w-24 items-center justify-center rounded-full border border-brand/40 bg-brand/10 text-3xl font-semibold text-brand">
                     {initials}
                   </span>
@@ -301,7 +301,7 @@ export function MasterclassSection({
                   once
                   className="text-balance text-[18px] font-semibold leading-tight tracking-[-0.035em] sm:text-[24px] lg:text-[30px]"
                 />
-                <p className="mt-4 text-[16px] leading-7 text-[#B0B0B0] sm:mt-6 sm:text-[20px] sm:leading-8">
+                <p className="mt-4 text-[16px] leading-7 text-[#CCCCCC] sm:mt-6 sm:text-[20px] sm:leading-8">
                   {activeDescription}
                 </p>
               </motion.div>

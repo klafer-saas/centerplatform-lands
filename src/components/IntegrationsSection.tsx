@@ -76,7 +76,7 @@ export function IntegrationsSection({
     <section
       id="integracoes"
       aria-labelledby="integrations-title"
-      className="overflow-hidden bg-ink px-5 py-20 text-white sm:px-8 sm:py-28 lg:px-12 lg:py-32"
+      className="overflow-hidden bg-ink px-5 py-20 text-white sm:px-8 sm:py-[60px] lg:px-12 xl:py-32"
     >
       <div className="mx-auto w-full max-w-7xl">
         <header className="mx-auto flex max-w-4xl flex-col items-center text-center">
@@ -119,7 +119,7 @@ export function IntegrationsSection({
 
           <FadeInText
             text="Conecte as ferramentas que sua rede já utiliza e automatize processos com integrações inteligentes de ponta a ponta."
-            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#DDD] sm:text-[20px] sm:leading-8"
+            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#CCCCCC] sm:text-[20px] sm:leading-8"
           />
         </header>
 
