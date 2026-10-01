@@ -65,8 +65,8 @@ const defaultSolutions: SolutionItem[] = [
 
 export function SolutionsSection({
   badge = "Soluções",
-  title = "Inteligência Artificial para Redes de Franquia",
-  description = "Centralize a gestão, reduza custos operacionais e escale sua rede de franquias com automação e inteligência artificial de ponta a ponta.",
+  title = "Escale a sua rede com Inteligência Artificial",
+  description = "Centralize a gestão, reduza custos operacionais e escale o seu negócio com automação de ponta a ponta.",
   solutions = defaultSolutions,
 }: SolutionsSectionProps) {
   const prefersReducedMotion = useReducedMotion();
@@ -125,16 +125,16 @@ export function SolutionsSection({
             staggerDelay={0.055}
             delayChildren={0.1}
             once
-            className="mt-3 text-balance font-sans text-[20px] font-semibold leading-[1.15] tracking-[-0.03em] sm:text-[28px] lg:text-[35px]"
+            className="mt-3 text-balance font-sans text-[20px] font-semibold leading-[1.15] tracking-[-0.03em] sm:text-[30px]"
           />
 
           <FadeInText
             text={description}
-            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#CCCCCC] sm:text-[20px] sm:leading-8"
+            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#CCCCCC] sm:text-[18px] sm:leading-8"
           />
         </header>
 
-        <div className="mt-12 grid gap-4 sm:mt-20 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-[1085px] gap-3 sm:mt-20 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {safeSolutions.map((solution, index) => {
             const Icon = solution.icon;
 
@@ -166,13 +166,13 @@ export function SolutionsSection({
                   delay: prefersReducedMotion ? 0 : index * 0.06,
                   ease: [0.25, 0.1, 0.25, 1],
                 }}
-                className="group flex min-h-[210px] w-full max-w-[350px] flex-col items-center justify-center justify-self-center rounded-2xl border border-white/[0.04] bg-[linear-gradient(145deg,#1d1d1d,#161616)] px-6 py-6 text-center shadow-[0_18px_55px_rgba(0,0,0,0.22)] transition-[background,box-shadow] duration-500 ease-out hover:bg-[linear-gradient(145deg,#252525,#181818)] hover:shadow-[0_24px_70px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.06)] sm:min-h-64 sm:max-w-none sm:px-9 sm:py-11"
+                className="group flex min-h-[200px] w-full max-w-[335px] flex-col items-center justify-center justify-self-center rounded-2xl border border-white/[0.04] bg-[linear-gradient(145deg,#1d1d1d,#161616)] px-5 py-5 text-center shadow-[0_18px_55px_rgba(0,0,0,0.22)] transition-[background,box-shadow] duration-500 ease-out hover:bg-[linear-gradient(145deg,#252525,#181818)] hover:shadow-[0_24px_70px_rgba(0,0,0,0.38),inset_0_1px_0_rgba(255,255,255,0.06)] sm:min-h-[230px] sm:max-w-[370px] sm:px-7 sm:py-8 lg:max-w-[350px]"
               >
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand text-black shadow-[0_10px_30px_rgba(254,176,0,0.18)] transition-transform duration-300 ease-out group-hover:scale-110 group-hover:rotate-3 motion-reduce:transform-none sm:h-12 sm:w-12">
                   <Icon aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2} />
                 </span>
 
-                <h3 className="mt-4 max-w-sm text-[16px] font-semibold leading-[1.2] text-white sm:mt-5 sm:text-[22px]">
+                <h3 className="mt-4 max-w-sm text-[16px] font-semibold leading-[1.2] text-white">
                   {solution.title}
                 </h3>
 

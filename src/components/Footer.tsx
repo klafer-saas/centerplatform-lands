@@ -1,4 +1,5 @@
-import type { SVGProps } from "react";
+import { useState, type SVGProps } from "react";
+import { ChevronDown, Languages } from "lucide-react";
 import centerPlatformLogo from "../assets/centerplatform-logo.svg";
 
 function InstagramIcon(props: SVGProps<SVGSVGElement>) {
@@ -36,7 +37,21 @@ const socialLinks = [
   { label: "YouTube", icon: YoutubeIcon },
 ];
 
+const footerLinks = [
+  { label: "Termos de Uso", href: "/termos-de-uso" },
+  { label: "Política de Privacidade", href: "/politica-de-privacidade" },
+  { label: "Central de Ajuda", href: "/central-de-ajuda" },
+];
+
+const languageOptions = [
+  { value: "pt-BR", label: "Português (Brasil)" },
+  { value: "en", label: "English" },
+  { value: "es", label: "Español" },
+];
+
 export function Footer() {
+  const [language, setLanguage] = useState("pt-BR");
+
   return (
     <footer id="contato" className="bg-[#111] px-5 text-[#CCCCCC] sm:px-8 lg:px-12">
       <div className="mx-auto w-full max-w-7xl pb-7 pt-14 sm:pt-[60px] xl:pt-16">
@@ -111,10 +126,50 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/[0.08] pt-6 sm:mt-14">
+        <div className="mt-10 flex flex-col items-start gap-5 border-t border-white/[0.08] pt-6 sm:mt-14 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs">
             © CenterPlatform.ai. Todos os direitos reservados.
           </p>
+          <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+            <nav aria-label="Links legais e de suporte">
+              <ul className="flex flex-wrap items-center gap-x-5 gap-y-3">
+                {footerLinks.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-xs transition-colors hover:text-white focus-visible:outline-none focus-visible:text-brand"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <label className="relative flex shrink-0 items-center gap-2 text-[#CCCCCC]">
+              <Languages aria-hidden="true" className="h-4 w-4 shrink-0" />
+              <select
+                aria-label="Selecionar idioma"
+                value={language}
+                onChange={(event) => setLanguage(event.target.value)}
+                className="cursor-pointer appearance-none bg-transparent py-1 pl-0 pr-6 text-xs font-normal text-[#CCCCCC] outline-none transition-colors hover:text-white focus:text-brand"
+              >
+                {languageOptions.map((option) => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                    className="bg-[#191919] text-white"
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                aria-hidden="true"
+                className="pointer-events-none absolute right-0 h-4 w-4"
+              />
+            </label>
+          </div>
         </div>
       </div>
     </footer>

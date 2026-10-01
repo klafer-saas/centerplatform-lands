@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import assistantMockups from "../assets/group-28-1-mockup.svg";
+import assistantMockups from "../assets/mockup.svg";
 
 export function MockupShowcase() {
   const shouldReduceMotion = useReducedMotion();
@@ -35,13 +35,13 @@ export function MockupShowcase() {
       >
         <div
           id="mockup-preview"
-          className="relative mx-auto w-full max-w-[1360px] overflow-hidden"
+          className="relative mx-auto w-full max-w-[1180px] overflow-hidden"
         >
           <img
             src={assistantMockups}
-            alt="Assistente CenterPlatform.ai exibido em notebook, tablet e celular"
-            width={1440}
-            height={829}
+            alt="Prévia da plataforma CenterPlatform.ai"
+            width={987}
+            height={568}
             className="h-auto w-full object-contain drop-shadow-[0_34px_80px_rgba(0,0,0,0.58)]"
             loading="eager"
             fetchPriority="high"

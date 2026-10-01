@@ -17,6 +17,11 @@ const IntelligenceStepsSection = lazy(() =>
     default: module.IntelligenceStepsSection,
   })),
 );
+const AiAssistantCtaSection = lazy(() =>
+  import("./components/AiAssistantCtaSection").then((module) => ({
+    default: module.AiAssistantCtaSection,
+  })),
+);
 const SolutionsSection = lazy(() =>
   import("./components/SolutionsSection").then((module) => ({
     default: module.SolutionsSection,
@@ -25,11 +30,6 @@ const SolutionsSection = lazy(() =>
 const TestimonialsSection = lazy(() =>
   import("./components/TestimonialsSection").then((module) => ({
     default: module.TestimonialsSection,
-  })),
-);
-const IntegrationsSection = lazy(() =>
-  import("./components/IntegrationsSection").then((module) => ({
-    default: module.IntegrationsSection,
   })),
 );
 function SectionFallback({ minHeight = "60vh" }: { minHeight?: string }) {
@@ -82,17 +82,17 @@ export default function App() {
       <Suspense fallback={<SectionFallback minHeight="850px" />}>
         <MasterclassSection photos={masterclassPhotos} />
       </Suspense>
-      <Suspense fallback={<SectionFallback minHeight="100vh" />}>
-        <IntelligenceStepsSection />
-      </Suspense>
       <Suspense fallback={<SectionFallback minHeight="800px" />}>
         <SolutionsSection />
       </Suspense>
+      <Suspense fallback={<SectionFallback minHeight="100vh" />}>
+        <IntelligenceStepsSection />
+      </Suspense>
+      <Suspense fallback={<SectionFallback minHeight="620px" />}>
+        <AiAssistantCtaSection />
+      </Suspense>
       <Suspense fallback={<SectionFallback minHeight="780px" />}>
         <TestimonialsSection />
-      </Suspense>
-      <Suspense fallback={<SectionFallback minHeight="760px" />}>
-        <IntegrationsSection />
       </Suspense>
       <Footer />
       </main>}

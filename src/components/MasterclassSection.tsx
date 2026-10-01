@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatedTitle } from "./AnimatedTitle";
 
 export type MasterclassPhoto = {
@@ -69,6 +70,14 @@ export function MasterclassSection({
     return () => window.clearInterval(timer);
   }, [carouselPaused, displayPhotos.length, prefersReducedMotion]);
 
+  const showPreviousPhoto = () => {
+    setActivePhoto((current) => (current - 1 + slideCount) % slideCount);
+  };
+
+  const showNextPhoto = () => {
+    setActivePhoto((current) => (current + 1) % slideCount);
+  };
+
   const currentSlide = displayPhotos[activePhoto];
   const activeInstructorName = currentSlide?.instructorName ?? instructorName;
   const activeFormerRole = currentSlide?.formerRole ?? formerRole;
@@ -95,7 +104,7 @@ export function MasterclassSection({
     { text: "Aprenda com" },
     {
       text: `${activeInstructorName},`,
-      className: "font-source-code-pro text-brand",
+      className: "font-sans text-brand",
     },
     { text: roleFirstLine },
     ...(roleSecondLine
@@ -110,29 +119,16 @@ export function MasterclassSection({
     .join("")
     .toUpperCase();
 
-  const headingBreakPhrase = "nomes do mercado";
-  const headingBreakIndex = heading
-    .toLocaleLowerCase("pt-BR")
-    .lastIndexOf(headingBreakPhrase);
-  const headingSegments =
-    headingBreakIndex > 0
-      ? [
-          { text: heading.slice(0, headingBreakIndex).trim() },
-          {
-            text: heading.slice(headingBreakIndex).trim(),
-            breakBefore: true,
-          },
-        ]
-      : [{ text: heading }];
+  const headingSegments = [{ text: heading }];
 
   return (
     <section
       id="masterclass"
       aria-labelledby="masterclass-heading"
-      className={`relative isolate overflow-hidden bg-ink px-5 pb-12 pt-16 text-white sm:px-8 sm:py-[60px] lg:px-12 xl:pb-32 xl:pt-28 ${className}`}
+      className={`relative isolate overflow-hidden bg-ink px-5 pb-10 pt-12 text-white sm:px-8 sm:py-12 lg:px-12 xl:py-20 ${className}`}
     >
       <div className="mx-auto w-full max-w-7xl">
-        <header className="mx-auto flex max-w-4xl flex-col items-center text-center">
+        <header className="mx-auto flex max-w-6xl flex-col items-center text-center">
           <motion.div
             initial={
               prefersReducedMotion
@@ -167,28 +163,45 @@ export function MasterclassSection({
             staggerDelay={0.06}
             delayChildren={0.14}
             once
-            className="mt-3 text-balance text-[20px] font-semibold leading-tight tracking-[-0.035em] sm:text-[28px] lg:text-[35px]"
+            className="mt-3 whitespace-nowrap text-[clamp(10px,3.15vw,30px)] font-semibold leading-tight tracking-[-0.035em]"
           />
 
           <AnimatedTitle
             as="p"
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            text="Aprenda diretamente com os maiores especialistas do setor e descubra as estratégias reais que impulsionam o sucesso dos líderes de mercado."
             staggerDelay={0.025}
             delayChildren={0.2}
             once
-            className="mt-5 max-w-3xl text-[16px] leading-6 text-[#CCCCCC] sm:text-[20px] sm:leading-8"
+            className="mt-5 max-w-3xl text-[18px] font-light leading-6 text-[#CCCCCC]"
           />
         </header>
 
-        <div className="mt-14 grid items-center gap-10 sm:mt-20 sm:gap-16 lg:mt-28 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:gap-24">
+        <motion.div
+          initial={
+            prefersReducedMotion
+              ? false
+              : { opacity: 0, y: 48, filter: "blur(6px)" }
+          }
+          whileInView={
+            prefersReducedMotion
+              ? undefined
+              : { opacity: 1, y: 0, filter: "blur(0px)" }
+          }
+          viewport={{ once: true, amount: 0.18 }}
+          transition={{
+            duration: 0.75,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="mt-10 grid items-center gap-10 sm:mt-14 sm:gap-12 lg:mt-20 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:gap-20"
+        >
           <div
-            className="relative mx-auto h-[320px] w-full max-w-[490px] sm:h-[360px] xl:h-[445px]"
+            className="relative mx-auto h-[300px] w-full max-w-[490px] sm:h-[340px] xl:h-[410px]"
             onMouseEnter={() => setCarouselPaused(true)}
             onMouseLeave={() => setCarouselPaused(false)}
             onFocus={() => setCarouselPaused(true)}
             onBlur={() => setCarouselPaused(false)}
           >
-            <div className="absolute inset-x-0 top-0 h-[270px] sm:h-[310px] xl:h-[395px]">
+            <div className="absolute inset-x-0 top-0 h-[260px] sm:h-[300px] xl:h-[360px]">
               {displayPhotos.map((photo, index) => {
                 const relativePosition =
                   (index - activePhoto + displayPhotos.length) %
@@ -217,7 +230,7 @@ export function MasterclassSection({
                     aria-label={`Exibir ${photo.alt}`}
                     aria-hidden={!isActive}
                     tabIndex={isActive ? 0 : -1}
-                    className="absolute left-1/2 top-0 h-[240px] w-[54vw] max-w-[205px] cursor-pointer appearance-none overflow-hidden rounded-[23px] border-0 bg-transparent p-0 shadow-none outline-none sm:h-[290px] sm:w-[55vw] sm:max-w-[220px] sm:rounded-[24px] xl:h-[365px] xl:w-[68vw] xl:max-w-[280px] xl:rounded-[26px]"
+                    className="absolute left-1/2 top-0 h-[230px] w-[54vw] max-w-[200px] cursor-pointer appearance-none overflow-hidden rounded-[23px] border-0 bg-transparent p-0 shadow-none outline-none sm:h-[275px] sm:w-[55vw] sm:max-w-[215px] sm:rounded-[24px] xl:h-[330px] xl:w-[68vw] xl:max-w-[255px] xl:rounded-[26px]"
                     animate={position}
                     initial={false}
                     transition={{
@@ -242,7 +255,7 @@ export function MasterclassSection({
               })}
 
               {!hasPhotos && (
-                <div className="absolute left-1/2 top-0 flex h-[240px] w-[54vw] max-w-[205px] -translate-x-1/2 flex-col items-center justify-center rounded-[23px] bg-[#151515] px-5 text-center sm:h-[290px] sm:w-[55vw] sm:max-w-[220px] sm:rounded-[24px] sm:px-8 xl:h-[365px] xl:w-[68vw] xl:max-w-[280px] xl:rounded-[26px]">
+                <div className="absolute left-1/2 top-0 flex h-[230px] w-[54vw] max-w-[200px] -translate-x-1/2 flex-col items-center justify-center rounded-[23px] bg-[#151515] px-5 text-center sm:h-[275px] sm:w-[55vw] sm:max-w-[215px] sm:rounded-[24px] sm:px-8 xl:h-[330px] xl:w-[68vw] xl:max-w-[255px] xl:rounded-[26px]">
                   <span className="flex h-24 w-24 items-center justify-center rounded-full border border-brand/40 bg-brand/10 text-3xl font-semibold text-brand">
                     {initials}
                   </span>
@@ -255,29 +268,26 @@ export function MasterclassSection({
 
             <div
               className="absolute bottom-0 left-1/2 z-40 flex -translate-x-1/2 items-center gap-3"
-              aria-label="Selecionar foto da masterclass"
+              aria-label="Navegar pelas fotos da masterclass"
             >
-              <div className="flex items-center gap-0.5">
-                {Array.from({ length: slideCount }).map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    aria-label={`Exibir foto ${index + 1} de ${slideCount}`}
-                    aria-current={index === activePhoto ? "true" : undefined}
-                    onClick={() => setActivePhoto(index)}
-                    className="group grid h-6 w-6 place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-4 focus-visible:ring-offset-ink"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`block h-2 rounded-full transition-all duration-300 ${
-                        index === activePhoto
-                          ? "w-5 bg-brand"
-                          : "w-2 bg-white/20 group-hover:bg-white/35"
-                      }`}
-                    />
-                  </button>
-                ))}
-              </div>
+              <button
+                type="button"
+                aria-label="Exibir apresentador anterior"
+                onClick={showPreviousPhoto}
+                disabled={slideCount < 2}
+                className="grid h-8 w-8 place-items-center rounded-full bg-[#2A2A2A] text-white/80 transition-colors hover:bg-[#383838] hover:text-white disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-4 focus-visible:ring-offset-ink"
+              >
+                <ChevronLeft aria-hidden="true" className="h-4 w-4" strokeWidth={1.7} />
+              </button>
+              <button
+                type="button"
+                aria-label="Exibir próximo apresentador"
+                onClick={showNextPhoto}
+                disabled={slideCount < 2}
+                className="grid h-8 w-8 place-items-center rounded-full bg-[#2A2A2A] text-white/80 transition-colors hover:bg-[#383838] hover:text-white disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-4 focus-visible:ring-offset-ink"
+              >
+                <ChevronRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.7} />
+              </button>
             </div>
           </div>
 
@@ -299,15 +309,15 @@ export function MasterclassSection({
                   staggerDelay={0.05}
                   delayChildren={0.08}
                   once
-                  className="text-balance text-[18px] font-semibold leading-tight tracking-[-0.035em] sm:text-[24px] lg:text-[30px]"
+                  className="text-balance text-[18px] font-semibold leading-tight tracking-[-0.035em] sm:text-[25px]"
                 />
-                <p className="mt-4 text-[16px] leading-7 text-[#CCCCCC] sm:mt-6 sm:text-[20px] sm:leading-8">
+                <p className="mt-4 text-[16px] leading-7 text-[#CCCCCC] sm:mt-6 sm:leading-8">
                   {activeDescription}
                 </p>
               </motion.div>
             </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
